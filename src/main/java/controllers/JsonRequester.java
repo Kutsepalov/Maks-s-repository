@@ -10,12 +10,14 @@ public class JsonRequester {
     public JsonRequester(String url) {
 	try {
 	    conn = (HttpURLConnection) new URL(url).openConnection();
+	    conn.connect();
 	    
 	} catch (MalformedURLException e) {
 	    throw new IncorrectURIException();
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	} finally {
+	    conn.disconnect();
 	}
     }
 }
